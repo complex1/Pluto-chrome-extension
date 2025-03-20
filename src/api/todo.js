@@ -42,24 +42,29 @@ export class Todo {
   }
 }
 
-const db = new IndexedDB('TodoDB', 'todos');
-await db.init();
+(
+  async () => {
+    window.todoDB = new  IndexedDB('TodoDB', 'todos');
+    await todoDB.init();
+  }
+)();
 
 export class TodoStorage {
+  db = window.todoDB;
   static async saveTodo(todo) {
-    await db.put(todo);
+    await this.db.put(todo);
   }
 
   static async getTodos(callback) {
-    const todos = await db.getAll();
+    const todos = await this.db.getAll();
     callback(todos);
   }
 
   static async updateTodo(updatedTodo) {
-    await db.put(updatedTodo);
+    await this.db.put(updatedTodo);
   }
 
   static async deleteTodo(todoId) {
-    await db.delete(todoId);
+    await this.db.delete(todoId);
   }
 }
