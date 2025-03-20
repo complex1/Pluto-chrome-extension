@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Pluto",
+  "version": "1.1",
+  "description": "A simple Hello World Chrome extension.",
+  "permissions": ["tabs"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "action": {
+    "default_icon": {
+      "16": "pluto.png",
+      "48": "pluto.png",
+      "128": "pluto.png"
+    }
+  },
+  "icons": {
+    "16": "pluto.png",
+    "48": "pluto.png",
+    "128": "pluto.png"
+  }
+}
